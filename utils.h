@@ -18,28 +18,15 @@ struct Menu {
     string soup;
     string mainFood;
     string dessert;
-    int price;
 };
 
-// set menu price based on food preference
-int setMenuPrice(string foodPreference) {
-    // set the price based on the food preference
-    int price;
-    switch (foodPreference[0]) {
-        case 'v':
-            price = 33;
-            break;
-        case 'f':
-            price = 46;
-            break;
-        default:
-            price = 40;
-            break;
-    }
-
-    // return the price
-    return price;
+// void show menu details
+void showMenuDetails(Menu menu) {
+    cout << "Soup: " << menu.soup << endl;
+    cout << "Main Food: " << menu.mainFood << endl;
+    cout << "Dessert: " << menu.dessert << endl;
 }
+
 
 // populate Menu struct with random values from csv files
 Menu generateMenu(string foodPreference) {
@@ -47,9 +34,9 @@ Menu generateMenu(string foodPreference) {
     Menu menu;
 
     // open the files
-    ifstream soupsFile("./data/menus/soups.txt");
+    ifstream soupsFile("./data/menus/soups.csv");
     ifstream mainFoodsFile;
-    ifstream dessertsFile("./data/menus/desserts.txt");
+    ifstream dessertsFile("./data/menus/desserts.csv");
 
     // based on the foodPreference, open the file (using switch)
     switch (foodPreference[0]) {
@@ -57,7 +44,7 @@ Menu generateMenu(string foodPreference) {
             mainFoodsFile.open("./data/menus/vegetarianMenu.csv");
             break;
         case 'f':
-            mainFoodsFile.open("./data/menus/flexitarianMenu.txt");
+            mainFoodsFile.open("./data/menus/flexitarianMenu.csv");
             break;
         default:
             mainFoodsFile.open("./data/menus/normalMenu.csv");
@@ -90,15 +77,11 @@ Menu generateMenu(string foodPreference) {
     mainFoodsFile.close();
     dessertsFile.close();
 
-    // set the menu properties
+    // set the menu properties (there are strings)
     menu.soup = soups[rand() % soups.size()];
     menu.mainFood = mainFoods[rand() % mainFoods.size()];
     menu.dessert = desserts[rand() % desserts.size()];
 
-    // set the price based on food preference (using function defined)
-    menu.price = setMenuPrice(foodPreference) * 3;
-
-    // return the menu
     return menu;
 }
 
@@ -266,11 +249,27 @@ int getCastleRentalPrice(int days) {
     return castleRentalPrice;
 }
 
-// get the total price for the movie production based on the number of days
-int getTotalPrice(int days, vector<Actor> mainActors, vector<Actor> newActors) {
-    // Calculate the total price for the movie production
-    int totalPrice = getRoomPrice(mainActors, newActors) * days + getWaterCoffeSodaPrice(mainActors) * days + getCastleRentalPrice(days) + getTransportCost(mainActors) * 2 + getTransportCost(newActors) * 2;
 
-    // return the total price for the movie production
-    return totalPrice;
+
+// assign every actor to a class, randomly choose between Human, Seers, Siren, Vampire, Werewolf
+string generateClass() {
+    // create an array of classes
+    vector<string> classes = {"Human", "Seers", "Siren", "Vampire", "Werewolf"};
+
+    // generate a random number between 0 and 4
+    int randomNumber = rand() % 5;
+
+    // return the class
+    return classes[randomNumber];
 }
+
+// convert lei to dolars
+double convertLeiToDolars(int lei) {
+    // convert lei to dolars
+    double dolars = lei / 4.8;
+
+    // return the dolars
+    return dolars;
+}
+
+

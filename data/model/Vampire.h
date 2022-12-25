@@ -1,20 +1,26 @@
 std::string generateFoodPreference();
 
-class Vampire {
-    int makeupPricePerDay;
-    int totalPrice;
-    std::string foodPreference;
-
+class Vampire : public Monster {
    public:
     // create an empty constructor that initialize foodPreference to random
     Vampire() {
         foodPreference = generateFoodPreference();
         // intialize makeupPricePerDay to 230
         makeupPricePerDay = 230;
+
     }
 
-    // show makeup price per day
-    void showMakeupPricePerDay() {
-        std::cout << "Makeup Price Per Day: " << makeupPricePerDay << std::endl;
+    // constructor with actorName and actorRole
+    Vampire(std::string actorName, std::string actorRole) {
+        // initialize foodPreference to random
+        foodPreference = generateFoodPreference();
+        // intialize makeupPricePerDay to 230
+        makeupPricePerDay = 230;
+        // initialize actorName and actorRole
+        this->actorName = actorName;
+        this->actorRole = actorRole;
+
+
     }
+
 };
