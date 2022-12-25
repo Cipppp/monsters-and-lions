@@ -1,0 +1,132 @@
+Director
+Writer
+Executive producer
+Cinematographer
+Production designer
+Art director
+Set decorator
+Costumer designer
+Makeup artist
+Hairstylist
+Sound designer
+Composer
+Music supervisor
+Film editor
+Visual effects supervisor
+Stunt coordinator
+Gaffer
+Best boy
+Key grip
+Boom operator
+Sound mixer
+ADR engineer
+Colorist
+Title designer
+Marketing director
+Distribution manager
+Publicist
+Talent agent
+Casting director
+Actor
+Actress
+Supporting actor
+Supporting actress
+Child actor
+Voice actor
+Stunt performer
+Stand-in
+Body double
+Extra
+Understudy
+Assistant director
+Second assistant director
+Third assistant director
+Script supervisor
+Production assistant
+Production coordinator
+Production manager
+Unit production manager
+Location manager
+Location scout
+Transportation coordinator
+Set dresser
+Props master
+Prop maker
+Property master
+Special effects coordinator
+Special effects technician
+Pyrotechnician
+Animator
+Concept artist
+Storyboard artist
+Previs artist
+Layout artist
+Modeler
+Texture artist
+Rigging artist
+Lighting artist
+Shader artist
+Compositing artist
+Matte painter
+3D generalist
+FX artist
+Motion graphics artist
+Video designer
+artist
+developer
+tester
+animator
+programmer
+audio designer
+producer
+project manager
+marketing specialist
+community manager
+customer support representative
+localization specialist
+quality assurance tester
+user researcher
+data analyst
+monetization specialist
+business development manager
+legal counsel
+finance manager
+operations manager
+content creator
+streamer
+content moderator
+content manager
+content marketer
+content writer
+content designer
+content producer
+content strategist
+content coordinator
+content analyst
+content specialist
+content marketing manager
+content marketing specialist
+content marketing coordinator
+content marketing analyst
+content marketing strategist
+social media manager
+social media specialist
+social media coordinator
+social media analyst
+social media strategist
+influencer manager
+influencer specialist
+influencer coordinator
+influencer analyst
+influencer strategist
+community manager
+community specialist
+community coordinator
+community analyst
+community strategist
+customer support manager
+customer support specialist
+customer support coordinator
+customer support analyst
+customer support strategist
+localization manager
