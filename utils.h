@@ -8,7 +8,7 @@
 using namespace std;
 
 // create a struct based on wednesdayCast.csv
-struct Actor {
+struct Person {
     string name;
     string role;
 };
@@ -18,6 +18,17 @@ struct Menu {
     string soup;
     string mainFood;
     string dessert;
+};
+
+// Create a struct for period price
+struct PeriodPrice {
+    string period;
+    double transportPrice;
+    double roomPrice;
+    double makeupPrice;
+    double foodPrice;
+    double rentPrice;
+    double totalPrice;
 };
 
 // void show menu details
@@ -85,10 +96,19 @@ Menu generateMenu(string foodPreference) {
     return menu;
 }
 
-// read actors from csv file and return a vector of actors
-vector<Actor> readActors(string filename) {
-    // create an array of actors
-    vector<Actor> actors;
+// convert lei to dolars
+double convertLeiToDolars(int lei) {
+    // convert lei to dolars
+    double dolars = lei / 4.8;
+
+    // return the dolars
+    return dolars;
+}
+
+// read persons from csv file 
+vector<Person> readPersons(string filename) {
+    // create an array of persons
+    vector<Person> persons;
 
     // open the file
     ifstream file(filename);
@@ -96,80 +116,114 @@ vector<Actor> readActors(string filename) {
     // read the file
     string line;
     while (getline(file, line)) {
-        // create an actor
-        Actor actor;
+        // create an person
+        Person person;
 
         // split the line into name and role
         auto comma = line.find(",");
-        actor.name = line.substr(0, comma);
-        actor.role = line.substr(comma + 1);
+        person.name = line.substr(0, comma);
+        person.role = line.substr(comma + 1);
 
-        // add the actor to the array
-        actors.push_back(actor);
+        // add the person to the array
+        persons.push_back(person);
     }
 
     // close the file
     file.close();
 
-    // return the array of actors
-
-    return actors;
+    // return the array of persons
+    return persons;
 }
 
-// print out the actors
-void printActors(vector<Actor> actors) {
-    for (auto actor : actors) {
-        cout << actor.name << " played " << actor.role << endl;
+
+// read persons from csv file (containing "person" in role string) and return a vector of persons 
+vector<Person> readActors(string filename) {
+    // create an array of persons
+    vector<Person> persons;
+
+    // open the file
+    ifstream file(filename);
+
+    // read the file
+    string line;
+    while (getline(file, line)) {
+        // create an person
+        Person person;
+
+        // split the line into name and role
+        auto comma = line.find(",");
+        person.name = line.substr(0, comma);
+        person.role = line.substr(comma + 1);
+
+        // add the person to the array only if role contains "actor"
+        if (person.role.find("actor/actress") != string::npos) {
+            persons.push_back(person);
+        }
+    }
+
+    // close the file
+    file.close();
+
+    // return the array of persons
+
+    return persons;
+}
+
+// print out the persons
+void printPersons(vector<Person> persons) {
+    for (auto person : persons) {
+        cout << person.name << " played " << person.role << endl;
     }
 }
 
-// generate another 132 random actors using Actor struct from names.txt and roles.txt
-vector<Actor> generateActors() {
-    // create an array of actors
-    vector<Actor> actors;
+// generate another 132 random persons using Person struct from names.txt and roles.txt
+vector<Person> generateFigurants() {
+    // create an array of persons
+    vector<Person> persons;
 
     // open the files
-    ifstream namesFile("./data/actors/names.txt");
-    ifstream rolesFile("./data/actors/roles.txt");
+    ifstream namesFile("./data/raw/names.txt");
+    ifstream rolesFile("./data/raw/roles.txt");
 
     // read the files
     string name;
     string role;
     while (getline(namesFile, name) && getline(rolesFile, role)) {
-        // create an actor
-        Actor actor;
+        // create an person
+        Person person;
 
         // set the name and role
-        actor.name = name;
-        actor.role = role;
+        person.name = name;
+        person.role = role;
 
-        // add the actor to the array
-        actors.push_back(actor);
+        // add the person to the array
+        persons.push_back(person);
     }
 
     // close the files
     namesFile.close();
     rolesFile.close();
 
-    // return the array of actors
-    return actors;
+    // return the array of persons
+    return persons;
 }
 
-// write actors to csv file
-void writeActors(vector<Actor> actors, string filename) {
+// write persons to csv file
+void writePersons(vector<Person> persons, string filename) {
     // open the file
     ofstream file(filename);
 
-    // write the actors to the file
-    for (auto actor : actors) {
-        file << actor.name << "," << actor.role << endl;
+    // write the persons to the file
+    for (auto person : persons) {
+        file << person.name << "," << person.role << endl;
     }
 
     // close the file
     file.close();
 }
 
-int getNumberOfActors(string filename) {
+
+int getNumberOfPersons(string filename) {
     // open the file
     ifstream file(filename);
 
@@ -183,15 +237,15 @@ int getNumberOfActors(string filename) {
     // close the file
     file.close();
 
-    // return the number of actors
+    // return the number of persons
     return count;
 }
 
-// Calculate the number of busses needed to transport the actors (1 bus = 50 actors)
-int getNumberOfBusses(vector<Actor> actors) {
+// Calculate the number of busses needed to transport the persons (1 bus = 50 people)
+int getNumberOfBusses(vector<Person> persons) {
     // Calculate the number of busses needed
-    int numberOfBusses = actors.size() / 50;
-    if (actors.size() % 50 != 0) {
+    int numberOfBusses = persons.size() / 50;
+    if (persons.size() % 50 != 0) {
         numberOfBusses++;
     }
 
@@ -199,10 +253,13 @@ int getNumberOfBusses(vector<Actor> actors) {
     return numberOfBusses;
 }
 
-// Calculate the transport cost (1 bus = 50 actors, 1 bus = 5680 lei)
-int getTransportCost(vector<Actor> actors) {
+// Calculate the transport cost (1 bus = 50 people, 1 bus = 5680 lei)
+int getTransportCost(vector<Person> persons) {
     // Calculate the transport cost
-    int transportCost = getNumberOfBusses(actors) * 5680;
+    int transportCost = getNumberOfBusses(persons) * 5680;
+
+    // convert the transport cost from lei to dolars
+    transportCost = convertLeiToDolars(transportCost);
 
     // return the transport cost
     return transportCost;
@@ -220,19 +277,25 @@ string generateFoodPreference() {
     return foodPreferences[randomNumber];
 }
 
-// get the price of rooms per night based on main actors and new actors, main actors stay 2 in a room and pay 350, new actors stay 3 in a room and pay 420
-int getRoomPrice(vector<Actor> mainActors, vector<Actor> newActors) {
+// get the price of rooms per night based on main persons and new persons, main persons stay 2 in a room and pay 350, new persons stay 3 in a room and pay 420
+int getRoomPrice(vector<Person> mainPersons, vector<Person> newPersons) {
     // Calculate the price of rooms per night
-    int roomPrice = (mainActors.size() / 2) * 350 + (newActors.size() / 3) * 420;
+    int roomPrice = (mainPersons.size() / 2) * 350 + (newPersons.size() / 3) * 420;
+
+    // convert the room price from lei to dolars
+    roomPrice = convertLeiToDolars(roomPrice);
 
     // return the price of rooms per night
     return roomPrice;
 }
 
 // get water,coffe and soda price per day, 1L of water per person, 0.5L of coffee per person, 0.8L of soda per person, 2L of water costs 6 dolars, 1L of coffee costs 30 dolars, 2L of soda costs 8 dolars
-int getWaterCoffeSodaPrice(vector<Actor> allActors) {
+int getWaterCoffeSodaPrice(vector<Person> allPersons) {
     // Calculate the price of water, coffee and soda per day
-    int waterCoffeSodaPrice = (allActors.size() * 3 + allActors.size() * 0.5 * 30 + allActors.size() * 0.8 * 4);
+    int waterCoffeSodaPrice = (allPersons.size() * 3 + allPersons.size() * 0.5 * 30 + allPersons.size() * 0.8 * 4);
+
+    // convert the water,coffe and soda price from lei to dolars
+    waterCoffeSodaPrice = convertLeiToDolars(waterCoffeSodaPrice);
 
     // return the price of water, coffee and soda per day
     return waterCoffeSodaPrice;
@@ -245,13 +308,16 @@ int getCastleRentalPrice(int days) {
     int discount = days / 10;
     castleRentalPrice -= castleRentalPrice * discount * 0.02;
 
+    // convert the castle rental price from lei to dolars
+    castleRentalPrice = convertLeiToDolars(castleRentalPrice);
+
     // return the price for castle rental
     return castleRentalPrice;
 }
 
 
 
-// assign every actor to a class, randomly choose between Human, Seers, Siren, Vampire, Werewolf
+// assign every person to a class, randomly choose between Human, Seers, Siren, Vampire, Werewolf
 string generateClass() {
     // create an array of classes
     vector<string> classes = {"Human", "Seers", "Siren", "Vampire", "Werewolf"};
@@ -263,13 +329,48 @@ string generateClass() {
     return classes[randomNumber];
 }
 
-// convert lei to dolars
-double convertLeiToDolars(int lei) {
-    // convert lei to dolars
-    double dolars = lei / 4.8;
+// add to CSV all details for period price using a PeriodPrice struct
+void exportPrices(PeriodPrice periodPrice, string filename) {
+    // Append the period price to the file
+    ofstream file(filename, ios::app);
 
-    // return the dolars
-    return dolars;
+    // write to CSV all details from periodPrice struct
+    file << periodPrice.period << endl;
+    file << "Transport: " << fixed << setprecision(0) << periodPrice.transportPrice << "$" << endl;
+    file << "Room: " << fixed << setprecision(0) << periodPrice.roomPrice << "$" << endl;
+    file << "Makeup: " << fixed << setprecision(0) << periodPrice.makeupPrice << "$" << endl;
+    file << "Food: " << fixed << setprecision(0) << periodPrice.foodPrice << "$" << endl;
+    file << "Rent: " << fixed << setprecision(0) << periodPrice.rentPrice << "$" << endl;
+    file << "Total: " << fixed << setprecision(0) << periodPrice.totalPrice << "$" << endl;
+    file << endl;
+    
+
+    // close the file
+    file.close();
 }
 
+// export every menu from paramter to a csv file (Menu vegetarianMenu,Menu flexitarianMenu,Menu anythingMenu, filename)
+// Menu = { string soup; string mainFood; string dessert; };
+void exportMenu(Menu vegetarianMenu, Menu flexitarianMenu, Menu anythingMenu, string filename) {
+    // open the file
+    ofstream file(filename);
 
+    // write the menus to the file
+    file << "Vegetarian menu" << endl;
+    file << "Soup," << vegetarianMenu.soup << endl;
+    file << "Main food," << vegetarianMenu.mainFood << endl;
+    file << "Dessert," << vegetarianMenu.dessert << endl;
+    file << endl;
+    file << "Flexitarian menu" << endl;
+    file << "Soup," << flexitarianMenu.soup << endl;
+    file << "Main food," << flexitarianMenu.mainFood << endl;
+    file << "Dessert," << flexitarianMenu.dessert << endl;
+    file << endl;
+    file << "Anything menu" << endl;
+    file << "Soup," << anythingMenu.soup << endl;
+    file << "Main food," << anythingMenu.mainFood << endl;
+    file << "Dessert," << anythingMenu.dessert << endl;
+
+    // close the file
+    file.close();
+}

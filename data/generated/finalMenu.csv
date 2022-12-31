@@ -1,0 +1,14 @@
+Vegetarian menu
+Soup,"soup","Cabbage Soup", "A hearty soup made with cabbage, beans, and a blend of vegetables in a savory broth"
+Main food,"vegetarianMenu","Roasted Vegetable and Hummus Wrap", "Roasted vegetables and hummus wrapped in a whole grain tortilla with lettuce and tomatoes"
+Dessert,"dessert", "Red Velvet Cake", "A moist and fluffy red velvet cake with a cream cheese frosting"
+
+Flexitarian menu
+Soup,"soup","Wild Mushroom Soup", "A rich and creamy soup made with a variety of wild mushrooms and herbs"
+Main food,"flexitarianMenu","Seafood Risotto", "A creamy seafood risotto made with a variety of seafood, including shrimp and scallops."
+Dessert,"dessert", "Red Velvet Cake", "A moist and fluffy red velvet cake with a cream cheese frosting"
+
+Anything menu
+Soup,"soup","Cabbage Soup", "A hearty soup made with cabbage, beans, and a blend of vegetables in a savory broth"
+Main food,"normalMenu","Grilled Chicken Sandwich", "Grilled chicken breast served on a bun with lettuce, tomato, and mayonnaise."
+Dessert,"dessert", "Caramel Apple Pie", "A flaky pie crust filled with sliced apples and a gooey caramel sauce"
