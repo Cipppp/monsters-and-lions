@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include <memory>
+#include <random>
 #include <string>
 #include <vector>
 
@@ -160,17 +161,35 @@ vector<PersonType> generateFigurants() {
     ifstream rolesFile("./data/raw/roles.txt");
 
     // read the files
+    vector<string> names;
+    vector<string> roles;
+
     string name;
     string role;
-    while (getline(namesFile, name) && getline(rolesFile, role)) {
-        // create an person
+
+    while (getline(namesFile, name)) {
+        names.push_back(name);
+    }
+
+    while (getline(rolesFile, role)) {
+        roles.push_back(role);
+    }
+
+    // Seed the random number generator
+    mt19937 rng(random_device{}());
+
+    // Generate 10 random names and roles
+    for (int i = 0; i < 132; i++) {
+        // Create a new Person object
         PersonType person;
 
-        // set the name and role
-        person.name = name;
-        person.role = role;
+        // Assign a random name and role to the person
+        person.name = names[uniform_int_distribution<size_t>{0, names.size() - 1}(rng)];
+        person.role = roles[uniform_int_distribution<size_t>{0, roles.size() - 1}(rng)];
 
-        // add the person to the array
+        // display the size of names and roles
+
+        // Add the person to the vector
         persons.push_back(person);
     }
 
