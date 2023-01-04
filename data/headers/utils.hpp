@@ -1,6 +1,8 @@
 #include <algorithm>
 #include <fstream>
+#include <iomanip>
 #include <iostream>
+#include <map>
 #include <memory>
 #include <random>
 #include <string>
@@ -15,17 +17,32 @@ using namespace std;
 #include "../model/Vampire.hpp"
 #include "../model/Werewolf.hpp"
 
-//? populate Menu struct with random values from csv files
+//! A map that associates language codes with the appropriate currency symbol
+const std::map<std::string, std::string> CURRENCY_SYMBOLS = {
+    {"en", "$"},
+    {"ro", "lei"}};
+
+//? Format a price in the specified language
+std::string formatPrice(double price, const std::string &language) {
+    // Look up the currency symbol for the specified language
+    auto it = CURRENCY_SYMBOLS.find(language);
+    std::string symbol = it != CURRENCY_SYMBOLS.end() ? it->second : "";
+
+    // Format the price with the appropriate symbol
+    return symbol + std::to_string(price);
+}
+
+//? Populate Menu struct with random values from csv files
 Menu generateMenu(string foodPreference) {
-    // create a menu with random values
+    // Create a menu with random values
     Menu menu;
 
-    // open the files
+    // Open the files
     ifstream soupsFile("./data/menus/soups.csv");
     ifstream mainFoodsFile;
     ifstream dessertsFile("./data/menus/desserts.csv");
 
-    // based on the foodPreference, open the file (using switch)
+    // Based on the foodPreference, open the file (using switch)
     switch (foodPreference[0]) {
         case 'v':
             mainFoodsFile.open("./data/menus/vegetarianMenu.csv");
@@ -38,7 +55,7 @@ Menu generateMenu(string foodPreference) {
             break;
     }
 
-    // read the files
+    // Read the files
     vector<string> soups;
     vector<string> mainFoods;
     vector<string> desserts;
@@ -59,12 +76,12 @@ Menu generateMenu(string foodPreference) {
         desserts.push_back(dessert);
     }
 
-    // close the files
+    // Close the files
     soupsFile.close();
     mainFoodsFile.close();
     dessertsFile.close();
 
-    // set the menu properties (there are strings)
+    // Set the menu properties (there are strings)
     menu.soup = soups[rand() % soups.size()];
     menu.mainFood = mainFoods[rand() % mainFoods.size()];
     menu.dessert = desserts[rand() % desserts.size()];
@@ -72,95 +89,90 @@ Menu generateMenu(string foodPreference) {
     return menu;
 }
 
-// convert lei to dolars
+//? Convert lei to dolars
 double convertLeiToDolars(int lei) {
-    // convert lei to dolars
-    double dolars = lei / 4.8;
-
-    // return the dolars
-    return dolars;
+    return lei / 4.8;
 }
 
-// read persons from csv file
+//? Read persons from csv file
 vector<PersonType> readPersons(string filename) {
-    // create an array of persons
+    // Create an array of persons
     vector<PersonType> persons;
 
-    // open the file
+    // Open the file
     ifstream file(filename);
 
-    // read the file
+    // Read the file
     string line;
     while (getline(file, line)) {
-        // create an person
+        // Create an person
         PersonType person;
 
-        // split the line into name and role
+        // Split the line into name and role
         auto comma = line.find(",");
         person.name = line.substr(0, comma);
         person.role = line.substr(comma + 1);
 
-        // add the person to the array
+        // Add the person to the array
         persons.push_back(person);
     }
 
-    // close the file
+    // Close the file
     file.close();
 
-    // return the array of persons
+    // Return the array of persons
     return persons;
 }
 
-// read persons from csv file (containing "person" in role string) and return a vector of persons
+//? Read persons from csv file (containing "person" in role string) and return a vector of persons
 vector<PersonType> readActors(string filename) {
-    // create an array of persons
+    // Create an array of persons
     vector<PersonType> persons;
 
-    // open the file
+    // Open the file
     ifstream file(filename);
 
-    // read the file
+    // Read the file
     string line;
     while (getline(file, line)) {
-        // create an person
+        // Create an person
         PersonType person;
 
-        // split the line into name and role
+        // Split the line into name and role
         auto comma = line.find(",");
         person.name = line.substr(0, comma);
         person.role = line.substr(comma + 1);
 
-        // add the person to the array only if role contains "actor"
+        // Add the person to the array only if role contains "actor"
         if (person.role.find("actor/actress") != string::npos) {
             persons.push_back(person);
         }
     }
 
-    // close the file
+    // Close the file
     file.close();
 
-    // return the array of persons
-
+    // Return the array of persons
     return persons;
 }
 
-// print out the persons
+// Print out the persons
 void printPersons(vector<PersonType> persons) {
     for (auto person : persons) {
         cout << person.name << " played " << person.role << endl;
     }
 }
 
-// generate another 132 random persons using PersonType struct from names.txt and roles.txt
+//? Generate another 132 random persons using PersonType struct from names.txt and roles.txt
 vector<PersonType> generateFigurants() {
-    // create an array of persons
+    // Create an array of persons
     vector<PersonType> persons;
 
-    // open the files
+    // Open the files
     ifstream namesFile("./data/raw/names.txt");
     ifstream rolesFile("./data/raw/roles.txt");
 
-    // read the files
+    // Read the files
     vector<string> names;
     vector<string> roles;
 
@@ -187,8 +199,6 @@ vector<PersonType> generateFigurants() {
         person.name = names[uniform_int_distribution<size_t>{0, names.size() - 1}(rng)];
         person.role = roles[uniform_int_distribution<size_t>{0, roles.size() - 1}(rng)];
 
-        // display the size of names and roles
-
         // Add the person to the vector
         persons.push_back(person);
     }
@@ -201,39 +211,40 @@ vector<PersonType> generateFigurants() {
     return persons;
 }
 
-// write persons to csv file
+//? Write persons to csv file
 void writePersons(vector<PersonType> persons, string filename) {
-    // open the file
+    // Open the file
     ofstream file(filename);
 
-    // write the persons to the file
+    // Write the persons to the file
     for (auto person : persons) {
         file << person.name << "," << person.role << endl;
     }
 
-    // close the file
+    // Close the file
     file.close();
 }
 
+//? Get the number of persons from a csv file
 int getNumberOfPersons(string filename) {
-    // open the file
+    // Open the file
     ifstream file(filename);
 
-    // read the file
+    // Read the file
     string line;
     int count = 0;
     while (getline(file, line)) {
         count++;
     }
 
-    // close the file
+    // Close the file
     file.close();
 
-    // return the number of persons
+    // Return the number of persons
     return count;
 }
 
-// Calculate the number of busses needed to transport the persons (1 bus = 50 people)
+//? Calculate the number of busses needed to transport the persons (1 bus = 50 people)
 int getNumberOfBusses(vector<PersonType> persons) {
     // Calculate the number of busses needed
     int numberOfBusses = persons.size() / 50;
@@ -241,66 +252,66 @@ int getNumberOfBusses(vector<PersonType> persons) {
         numberOfBusses++;
     }
 
-    // return the number of busses
+    // Return the number of busses
     return numberOfBusses;
 }
 
-// Calculate the transport cost (1 bus = 50 people, 1 bus = 5680 lei)
+//? Calculate the transport cost (1 bus = 50 people, 1 bus = 5680 lei)
 int getTransportCost(vector<PersonType> persons) {
     // Calculate the transport cost
     int transportCost = getNumberOfBusses(persons) * 5680;
 
-    // convert the transport cost from lei to dolars
+    // Convert the transport cost from lei to dolars
     transportCost = convertLeiToDolars(transportCost);
 
-    // return the transport cost
+    // Return the transport cost
     return transportCost;
 }
 
-// get the price of rooms per night based on main persons and new persons, main persons stay 2 in a room and pay 350, new persons stay 3 in a room and pay 420
+//? Get the price of rooms per night based on main persons and new persons, main persons stay 2 in a room and pay 350, new persons stay 3 in a room and pay 420
 int getRoomPrice(vector<PersonType> mainPersons, vector<PersonType> newPersons) {
     // Calculate the price of rooms per night
     int roomPrice = (mainPersons.size() / 2) * 350 + (newPersons.size() / 3) * 420;
 
-    // convert the room price from lei to dolars
+    // Convert the room price from lei to dolars
     roomPrice = convertLeiToDolars(roomPrice);
 
-    // return the price of rooms per night
+    // Return the price of rooms per night
     return roomPrice;
 }
 
-// get water,coffe and soda price per day, 1L of water per person, 0.5L of coffee per person, 0.8L of soda per person, 2L of water costs 6 dolars, 1L of coffee costs 30 dolars, 2L of soda costs 8 dolars
+//? Get water, coffe and soda price per day, 1L of water per person, 0.5L of coffee per person, 0.8L of soda per person, 2L of water costs 6 dolars, 1L of coffee costs 30 dolars, 2L of soda costs 8 dolars
 int getWaterCoffeSodaPrice(vector<PersonType> allPersons) {
     // Calculate the price of water, coffee and soda per day
     int waterCoffeSodaPrice = (allPersons.size() * 3 + allPersons.size() * 0.5 * 30 + allPersons.size() * 0.8 * 4);
 
-    // convert the water,coffe and soda price from lei to dolars
+    // Convert the water,coffe and soda price from lei to dolars
     waterCoffeSodaPrice = convertLeiToDolars(waterCoffeSodaPrice);
 
-    // return the price of water, coffee and soda per day
+    // Return the price of water, coffee and soda per day
     return waterCoffeSodaPrice;
 }
 
-// get price for castle rental, 10000 dolars per day, every 10 days the price is reduced by 2%
+//? Get price for castle rental, 10000 dolars per day, every 10 days the price is reduced by 2%
 int getCastleRentalPrice(int days) {
     // Calculate the price for castle rental
     int castleRentalPrice = 10000 * days;
     int discount = days / 10;
     castleRentalPrice -= castleRentalPrice * discount * 0.02;
 
-    // convert the castle rental price from lei to dolars
+    // Convert the castle rental price from lei to dolars
     castleRentalPrice = convertLeiToDolars(castleRentalPrice);
 
-    // return the price for castle rental
+    // Return the price for castle rental
     return castleRentalPrice;
 }
 
-// add to CSV all details for period price using a PeriodPrice struct
+//? Add to CSV all details for period price using a PeriodPrice struct
 void exportPrices(PeriodPrice periodPrice, string filename) {
     // Append the period price to the file
     ofstream file(filename, ios::app);
 
-    // write to CSV all details from periodPrice struct
+    // Write to CSV all details from periodPrice struct
     file << periodPrice.period << endl;
     file << "Transport: " << fixed << setprecision(0) << periodPrice.transportPrice << "$" << endl;
     file << "Room: " << fixed << setprecision(0) << periodPrice.roomPrice << "$" << endl;
@@ -310,17 +321,16 @@ void exportPrices(PeriodPrice periodPrice, string filename) {
     file << "Total: " << fixed << setprecision(0) << periodPrice.totalPrice << "$" << endl;
     file << endl;
 
-    // close the file
+    // Close the file
     file.close();
 }
 
-// export every menu from paramter to a csv file (Menu vegetarianMenu,Menu flexitarianMenu,Menu anythingMenu, filename)
-// Menu = { string soup; string mainFood; string dessert; };
+//? Export every menu from paramter to a csv file (Menu vegetarianMenu,Menu flexitarianMenu,Menu anythingMenu, filename)
 void exportMenu(Menu vegetarianMenu, Menu flexitarianMenu, Menu anythingMenu, string filename) {
-    // open the file
+    // Open the file
     ofstream file(filename);
 
-    // write the menus to the file
+    // Write the menus to the file
     file << "Vegetarian menu" << endl;
     file << "Soup," << vegetarianMenu.soup << endl;
     file << "Main food," << vegetarianMenu.mainFood << endl;
@@ -336,13 +346,13 @@ void exportMenu(Menu vegetarianMenu, Menu flexitarianMenu, Menu anythingMenu, st
     file << "Main food," << anythingMenu.mainFood << endl;
     file << "Dessert," << anythingMenu.dessert << endl;
 
-    // close the file
+    // Close the file
     file.close();
 }
 
-// get the total numbers of vegetarians, flexitarians and anything eaters
+//? Get the total numbers of vegetarians, flexitarians and anything eaters
 void getFoodPreferences(vector<Monster *> monsters, int &vegetarians, int &flexitarians, int &anythingEaters) {
-    // get the total numbers of vegetarians, flexitarians and anything eaters
+    // Get the total numbers of vegetarians, flexitarians and anything eaters
     for (auto monster : monsters) {
         if (monster->foodPreference == "vegetarian") {
             vegetarians++;
@@ -354,7 +364,7 @@ void getFoodPreferences(vector<Monster *> monsters, int &vegetarians, int &flexi
     }
 }
 
-// Calculate the total price per day of the menu based on vegetarian, flexitarian and anything eaters
+//? Calculate the total price per day of the menu based on vegetarian, flexitarian and anything eaters
 int calculateTotalFoodPrice(vector<Monster *> monsters) {
     int vegetarians = 0;
     int flexitarians = 0;
@@ -362,16 +372,16 @@ int calculateTotalFoodPrice(vector<Monster *> monsters) {
 
     getFoodPreferences(monsters, vegetarians, flexitarians, anythingEaters);
 
-    // calculate the total price of the menu based on vegetarian, flexitarian and anything eaters
+    // Calculate the total price of the menu based on vegetarian, flexitarian and anything eaters
     int totalPrice = vegetarians * 33 + flexitarians * 46 + anythingEaters * 40;
 
-    // convert the total price to dolars
+    // Convert the total price to dolars
     totalPrice = convertLeiToDolars(totalPrice);
 
     return totalPrice;
 }
 
-// Calculate the total price of makeup per day
+//? Calculate the total price of makeup per day
 int calculateTotalMakeupPrice(vector<Monster *> monsters) {
     int totalPrice = 0;
 
@@ -379,7 +389,7 @@ int calculateTotalMakeupPrice(vector<Monster *> monsters) {
         totalPrice += monster->makeupPricePerDay;
     }
 
-    // convert the total price to dolars
+    // Convert the total price to dolars
     totalPrice = convertLeiToDolars(totalPrice);
 
     return totalPrice;
@@ -417,7 +427,7 @@ PeriodPrice getPeriodPrice(int days, vector<Monster *> monsters, vector<PersonTy
     periodPrice.rentPrice = totalCastleRentalPrice;
     periodPrice.totalPrice = totalPrice;
 
-    // return the PeriodPrice object
+    // Return the PeriodPrice object
     return periodPrice;
 }
 
@@ -432,8 +442,7 @@ void getTotalPrice(vector<int> days, vector<Monster *> monsters, vector<PersonTy
     }
 }
 
-// generate monsters
-// For every person generate a class randomly and add it to an array of monsters
+//? For every person generate a class randomly and add it to an array of monsters
 vector<Monster *> generateMonsters(vector<PersonType> persons) {
     int personsSize = persons.size();
 
@@ -476,14 +485,14 @@ vector<Monster *> generateMonsters(vector<PersonType> persons) {
     return monsters;
 }
 
-// initialize every monster with a menu based on the food preference
+//? Initialize every monster with a menu based on the food preference
 void initializeMonstersMenu(vector<Monster *> monsters) {
-    // generate a menu based on the food preference (choose betwen 'v', 'f' and 'a')
+    // Generate a menu based on the food preference (choose betwen 'v', 'f' and 'a')
     Menu vegetarianMenu = generateMenu("vegetarian");
     Menu flexitarianMenu = generateMenu("flexitarian");
     Menu anythingMenu = generateMenu("anything");
 
-    // initialize every monster with a menu based on the food preference
+    // Initialize every monster with a menu based on the food preference
     for (int i = 0; i < monsters.size(); i++) {
         if (monsters[i]->foodPreference == "vegetarian") {
             monsters[i]->menu = vegetarianMenu;
@@ -494,7 +503,6 @@ void initializeMonstersMenu(vector<Monster *> monsters) {
         }
     }
 
-    // export every menu to a csv file
+    // Export every menu to a csv file
     exportMenu(vegetarianMenu, flexitarianMenu, anythingMenu, "./data/generated/finalMenu.csv");
 }
-// generate a README.md file for this project
