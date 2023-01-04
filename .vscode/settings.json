@@ -3,6 +3,7 @@
         "*.js": "javascriptreact",
         "*.py": "python",
         "*.txt": "plaintext",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "iostream": "cpp"
     }
 }
