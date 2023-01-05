@@ -33,7 +33,7 @@ int main() {
 
     //* ############## Meniul de mâncare (1 CSV) ################
     // initialize every monster with a menu based on the food preference
-    initializeMonstersMenu(monsters);
+    initializeMonstersMenu(monsters, "en");
 
     //* ############### Costul pentru fiecare perioadă (1 CSV) ################
     // Create a vector of days
