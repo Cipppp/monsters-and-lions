@@ -1,15 +1,15 @@
 Vegetarian menu
-Breakfast,"soup","Cabbage Soup", "A hearty soup made with cabbage, beans, and a blend of vegetables in a savory broth"
+Breakfast,"soup","Roasted Red Pepper Soup", "A creamy soup made with roasted red peppers, tomatoes, and onions"
 Lunch,"normalMenu","BLT Sandwich", "A classic sandwich made with crispy bacon, lettuce, tomato, and mayonnaise on toasted bread."
-Dinner,"dessert", "Red Velvet Cake", "A moist and fluffy red velvet cake with a cream cheese frosting"
+Dinner,"dessert", "Lemon Bars", "A refreshing dessert with a buttery crust and a tangy lemon filling"
 
 Flexitarian menu
-Breakfast,"soup","Wild Mushroom Soup", "A rich and creamy soup made with a variety of wild mushrooms and herbs"
-Lunch,"normalMenu","Grilled Chicken Sandwich", "Grilled chicken breast served on a bun with lettuce, tomato, and mayonnaise."
-Dinner,"dessert", "Red Velvet Cake", "A moist and fluffy red velvet cake with a cream cheese frosting"
+Breakfast,"soup","Cabbage Soup", "A hearty soup made with cabbage, beans, and a blend of vegetables in a savory broth"
+Lunch,"normalMenu","Grilled Cheese Sandwich", "Melted cheese between two slices of toasted bread."
+Dinner,"dessert", "Chocolate Mousse", "A rich and creamy chocolate mousse made with dark chocolate and whipped cream"
 
 Anything menu
-Breakfast,"soup","Cabbage Soup", "A hearty soup made with cabbage, beans, and a blend of vegetables in a savory broth"
-Lunch,"normalMenu","Grilled Chicken Sandwich", "Grilled chicken breast served on a bun with lettuce, tomato, and mayonnaise."
+Breakfast,"soup","Split Pea Soup", "A creamy soup made with split peas and a blend of vegetables"
+Lunch,"normalMenu","Pizza", "Classic pizza topped with tomato sauce, cheese, and a variety of meats and vegetables."
 Dinner,"dessert", "Caramel Apple Pie", "A flaky pie crust filled with sliced apples and a gooey caramel sauce"
 

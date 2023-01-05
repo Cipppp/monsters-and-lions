@@ -26,21 +26,22 @@ int main() {
     writePersons(persons, "./data/generated/finalCast.csv");
 
     // generate monsters from actors and figurants and then combine it in one array
-    vector<Monster *> monsters = generateMonsters(actors);
+    vector<Monster *> allMonsters = generateMonsters(actors);
+    vector<Monster *> figurantsMonsters = generateMonsters(figurants);
 
     // add to monsters the generated monsters figurants
-    monsters.insert(monsters.end(), generateMonsters(figurants).begin(), generateMonsters(figurants).end());
+    allMonsters.insert(allMonsters.end(), figurantsMonsters.begin(), figurantsMonsters.end());
 
     //* ############## Meniul de mâncare (1 CSV) ################
     // initialize every monster with a menu based on the food preference
-    initializeMonstersMenu(monsters, "en");
+    initializeMonstersMenu(allMonsters, "en");
 
     //* ############### Costul pentru fiecare perioadă (1 CSV) ################
     // Create a vector of days
     vector<int> days = {30, 45, 60, 100};
 
     // get the total price for the movie production based on the number of days
-    getTotalPrice(days, monsters, persons, figurants);
+    getTotalPrice(days, allMonsters, persons, figurants);
 
     return 0;
 }

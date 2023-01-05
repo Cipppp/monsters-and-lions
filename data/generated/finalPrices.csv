@@ -1,112 +1,56 @@
-Perioada,Period 30 days
-Cost transport,49700.00
-Cost camere,1062660.00
-Cost apa, cafea si suc,13350.00
-Cost inchiriere castel,1762500.00
-Cost total,3108350.00
+Period,Period 30 days
+Transport cost,49700.00$
+Room price,1062660.00$
+Water, coffee and soda price,45990.00$
+Castle rental price,1762500.00$
+Total price,3359030.00$
 
-Perioada,Period 45 days
-Cost transport,49700.00
-Cost camere,1593990.00
-Cost apa, cafea si suc,20025.00
-Cost inchiriere castel,3881250.00
-Cost total,5875175.00
+Period,Period 45 days
+Transport cost,49700.00$
+Room price,1593990.00$
+Water, coffee and soda price,68985.00$
+Castle rental price,3881250.00$
+Total price,6251195.00$
 
-Perioada,Period 60 days
-Cost transport,49700.00
-Cost camere,2125320.00
-Cost apa, cafea si suc,26700.00
-Cost inchiriere castel,6600000.00
-Cost total,9242000.00
+Period,Period 60 days
+Transport cost,49700.00$
+Room price,2125320.00$
+Water, coffee and soda price,91980.00$
+Castle rental price,6600000.00$
+Total price,9743360.00$
 
-Perioada,Period 100 days
-Cost transport,49700.00
-Cost camere,3542200.00
-Cost apa, cafea si suc,44500.00
-Cost inchiriere castel,16666600.00
-Cost total,21036800.00
+Period,Period 100 days
+Transport cost,49700.00$
+Room price,3542200.00$
+Water, coffee and soda price,153300.00$
+Castle rental price,16666600.00$
+Total price,21872400.00$
 
-Perioada,Period 30 days
-Cost transport,49700.00
-Cost camere,1062660.00
-Cost apa, cafea si suc,13350.00
-Cost inchiriere castel,1762500.00
-Cost total,3108350.00
+Period,Period 30 days
+Transport cost,49700.00$
+Room price,1062660.00$
+Water, coffee and soda price,178320.00$
+Castle rental price,1762500.00$
+Total price,3491360.00$
 
-Perioada,Period 45 days
-Cost transport,49700.00
-Cost camere,1593990.00
-Cost apa, cafea si suc,20025.00
-Cost inchiriere castel,3881250.00
-Cost total,5875175.00
+Period,Period 45 days
+Transport cost,49700.00$
+Room price,1593990.00$
+Water, coffee and soda price,267480.00$
+Castle rental price,3881250.00$
+Total price,6449690.00$
 
-Perioada,Period 60 days
-Cost transport,49700.00
-Cost camere,2125320.00
-Cost apa, cafea si suc,26700.00
-Cost inchiriere castel,6600000.00
-Cost total,9242000.00
+Period,Period 60 days
+Transport cost,49700.00$
+Room price,2125320.00$
+Water, coffee and soda price,356640.00$
+Castle rental price,6600000.00$
+Total price,10008020.00$
 
-Perioada,Period 100 days
-Cost transport,49700.00
-Cost camere,3542200.00
-Cost apa, cafea si suc,44500.00
-Cost inchiriere castel,16666600.00
-Cost total,21036800.00
-
-Perioada,Period 30 days
-Cost transport,49700.00
-Cost camere,1062660.00
-Cost apa, cafea si suc,13350.00
-Cost inchiriere castel,1762500.00
-Cost total,3108350.00
-
-Perioada,Period 45 days
-Cost transport,49700.00
-Cost camere,1593990.00
-Cost apa, cafea si suc,20025.00
-Cost inchiriere castel,3881250.00
-Cost total,5875175.00
-
-Perioada,Period 60 days
-Cost transport,49700.00
-Cost camere,2125320.00
-Cost apa, cafea si suc,26700.00
-Cost inchiriere castel,6600000.00
-Cost total,9242000.00
-
-Perioada,Period 100 days
-Cost transport,49700.00
-Cost camere,3542200.00
-Cost apa, cafea si suc,44500.00
-Cost inchiriere castel,16666600.00
-Cost total,21036800.00
-
-Perioada,Period 30 days
-Cost transport,49700.00
-Cost camere,1062660.00
-Cost apa, cafea si suc,13350.00
-Cost inchiriere castel,1762500.00
-Cost total,3108350.00
-
-Perioada,Period 45 days
-Cost transport,49700.00
-Cost camere,1593990.00
-Cost apa, cafea si suc,20025.00
-Cost inchiriere castel,3881250.00
-Cost total,5875175.00
-
-Perioada,Period 60 days
-Cost transport,49700.00
-Cost camere,2125320.00
-Cost apa, cafea si suc,26700.00
-Cost inchiriere castel,6600000.00
-Cost total,9242000.00
-
-Perioada,Period 100 days
-Cost transport,49700.00
-Cost camere,3542200.00
-Cost apa, cafea si suc,44500.00
-Cost inchiriere castel,16666600.00
-Cost total,21036800.00
+Period,Period 100 days
+Transport cost,49700.00$
+Room price,3542200.00$
+Water, coffee and soda price,594400.00$
+Castle rental price,16666600.00$
+Total price,22313500.00$
 
