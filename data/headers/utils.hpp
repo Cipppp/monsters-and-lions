@@ -611,7 +611,7 @@ PeriodPrice getPeriodPrice(int days, vector<Monster *> monsters, vector<PersonTy
         double totalTransportPrice = (getTransportCost(mainPersons) + getTransportCost(newPersons)) * 2;
 
         // Calculate the total price of the castle rental
-        double totalCastleRentalPrice = getCastleRentalPrice(days) * days;
+        double totalCastleRentalPrice = getCastleRentalPrice(days);
 
         // Calculate the total price for the movie production based on the number of days
         double totalPrice = totalFoodPrice + totalMakeupPrice + totalRoomPrice + totalWaterCoffeSodaPrice + totalTransportPrice + totalCastleRentalPrice;
