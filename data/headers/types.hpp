@@ -11,6 +11,13 @@ struct Menu {
     string soup;
     string mainFood;
     string dessert;
+
+    // Create a function to display the menu
+    void displayMenu() {
+        cout << "Soup: " << soup << endl;
+        cout << "Main food: " << mainFood << endl;
+        cout << "Dessert: " << dessert << endl;
+    }
 };
 
 //? Create a struct for period price

@@ -33,15 +33,24 @@ int main() {
     allMonsters.insert(allMonsters.end(), figurantsMonsters.begin(), figurantsMonsters.end());
 
     //* ############## Meniul de mâncare (1 CSV) ################
+
+    // take input from the user for language
+    string language;
+    cout << "Choose a language (en/ro): ";
+    cin >> language;
+
+    // convert the language to lowercase
+    language = toLower(language);
+
     // initialize every monster with a menu based on the food preference
-    initializeMonstersMenu(allMonsters, "en");
+    initializeMonstersMenu(allMonsters, language);
 
     //* ############### Costul pentru fiecare perioadă (1 CSV) ################
     // Create a vector of days
     vector<int> days = {30, 45, 60, 100};
 
     // get the total price for the movie production based on the number of days
-    getTotalPrice(days, allMonsters, persons, figurants);
+    getTotalPrice(days, allMonsters, persons, figurants, language);
 
     return 0;
 }

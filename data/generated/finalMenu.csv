@@ -1,15 +1,10 @@
-Vegetarian menu
-Breakfast,"soup","Roasted Red Pepper Soup", "A creamy soup made with roasted red peppers, tomatoes, and onions"
-Lunch,"normalMenu","BLT Sandwich", "A classic sandwich made with crispy bacon, lettuce, tomato, and mayonnaise on toasted bread."
-Dinner,"dessert", "Lemon Bars", "A refreshing dessert with a buttery crust and a tangy lemon filling"
-
-Flexitarian menu
-Breakfast,"soup","Cabbage Soup", "A hearty soup made with cabbage, beans, and a blend of vegetables in a savory broth"
-Lunch,"normalMenu","Grilled Cheese Sandwich", "Melted cheese between two slices of toasted bread."
-Dinner,"dessert", "Chocolate Mousse", "A rich and creamy chocolate mousse made with dark chocolate and whipped cream"
-
-Anything menu
-Breakfast,"soup","Split Pea Soup", "A creamy soup made with split peas and a blend of vegetables"
-Lunch,"normalMenu","Pizza", "Classic pizza topped with tomato sauce, cheese, and a variety of meats and vegetables."
-Dinner,"dessert", "Caramel Apple Pie", "A flaky pie crust filled with sliced apples and a gooey caramel sauce"
-
+Day,Soup,Main Food,Dessert
+1,"soup","Wild Mushroom Soup", "A rich and creamy soup made with a variety of wild mushrooms and herbs","vegetarianMenu","Quinoa and Bean Salad", "A mix of quinoa, black beans, corn, and roasted vegetables, topped with a citrus vinaigrette","dessert", "Brownies", "Fudgy and rich chocolate brownies with a crackly top"
+1,"soup","Cauliflower Soup", "A creamy soup made with roasted cauliflower and a hint of nutmeg","vegetarianMenu","Butternut Squash and Kale Quiche", "A savory quiche with butternut squash, kale, and a creamy tofu filling, served with a side salad","dessert", "Peach Cobbler", "A warm and gooey cobbler with ripe peaches and a crispy biscuit topping"
+1,"soup","Tomato Soup", "A classic tomato soup made with ripe tomatoes, onions, and garlic","vegetarianMenu","Grilled Vegetable and Pesto Pizza", "Whole grain pizza crust with grilled vegetables, pesto sauce, and vegan cheese","dessert", "Red Velvet Cake", "A moist and fluffy red velvet cake with a cream cheese frosting"
+2,"soup","Roasted Red Pepper Soup", "A creamy soup made with roasted red peppers, tomatoes, and onions","flexitarianMenu","Thai Curry with Shrimp", "A hearty Thai curry made with shrimp, coconut milk, and a variety of vegetables.","dessert", "Red Velvet Cake", "A moist and fluffy red velvet cake with a cream cheese frosting"
+2,"soup","Minestrone", "A hearty soup with a mix of vegetables, beans, and pasta in a tomato broth","flexitarianMenu","Grilled Salmon with Quinoa and Roasted Vegetables", "Grilled salmon served over a bed of quinoa and roasted vegetables.","dessert", "Red Velvet Cake", "A moist and fluffy red velvet cake with a cream cheese frosting"
+2,"soup","Roasted Red Pepper Soup", "A creamy soup made with roasted red peppers, tomatoes, and onions","flexitarianMenu","Thai Curry with Shrimp", "A hearty Thai curry made with shrimp, coconut milk, and a variety of vegetables.","dessert", "Peanut Butter Cookies", "Soft and chewy peanut butter cookies made with creamy peanut butter"
+3,"soup","Roasted Red Pepper Soup", "A creamy soup made with roasted red peppers, tomatoes, and onions","normalMenu","Stir-Fry", "A variety of vegetables and protein stir-fried with a choice of sauce, served over rice.","dessert", "Red Velvet Cake", "A moist and fluffy red velvet cake with a cream cheese frosting"
+3,"soup","Butternut Squash Soup", "A velvety soup made with roasted butternut squash, onions, and a hint of nutmeg","normalMenu","Fried Chicken", "Crispy fried chicken served with a side of mashed potatoes and gravy.","dessert", "Caramel Apple Pie", "A flaky pie crust filled with sliced apples and a gooey caramel sauce"
+3,"soup","Split Pea Soup", "A creamy soup made with split peas and a blend of vegetables","normalMenu","Cheeseburger", "Grilled beef patty served on a toasted bun with cheddar cheese, lettuce, tomato, and pickles.","dessert", "Chocolate Chip Cookies", "Soft and chewy chocolate chip cookies made with semi-sweet chocolate chips"

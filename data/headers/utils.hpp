@@ -57,21 +57,30 @@ Menu generateMenu(string foodPreference, const std::string &language) {
 
     // Catch the error if the files are not found
     try {
+        // Open the files based on the language and food preference
         if (language == "en") {
             soupsFile.open("./data/menus/soups.csv");
-            mainFoodsFile.open("./data/menus/normalMenu.csv");
+            if (foodPreference == "v") {
+                mainFoodsFile.open("./data/menus/vegetarianMenu.csv");
+            } else if (foodPreference == "f") {
+                mainFoodsFile.open("./data/menus/flexitarianMenu.csv");
+            } else {
+                mainFoodsFile.open("./data/menus/normalMenu.csv");
+            }
             dessertsFile.open("./data/menus/desserts.csv");
         } else if (language == "ro") {
             soupsFile.open("./data/menus/soupsRO.csv");
-            mainFoodsFile.open("./data/menus/normalMenuRO.csv");
+            if (foodPreference == "v") {
+                mainFoodsFile.open("./data/menus/vegetarianMenuRO.csv");
+            } else if (foodPreference == "f") {
+                mainFoodsFile.open("./data/menus/flexitarianMenuRO.csv");
+            } else {
+                mainFoodsFile.open("./data/menus/normalMenuRO.csv");
+            }
             dessertsFile.open("./data/menus/dessertsRO.csv");
+        } else {
+            throw "Invalid language";
         }
-
-        // Throw an error if the files are not found
-        if (!soupsFile.is_open() || !mainFoodsFile.is_open() || !dessertsFile.is_open()) {
-            throw "Could not open files";
-        }
-
     } catch (const std::exception &e) {
         // Handle the exception here
         std::cout << "Error: " << e.what() << std::endl;
@@ -435,9 +444,10 @@ void exportPrices(PeriodPrice periodPrice, string filename, const std::string &l
         // Write to CSV all details from periodPrice struct based on language, if language is "en" write in english, if language is "ro" write in romanian, set the price using setprecision(2) and fixed
         if (language == "en") {
             file << "Period," << periodPrice.period << endl;
-            file << "Transport cost," << setprecision(2) << fixed << periodPrice.transportPrice << "$" << endl;
+            file << "Transport price," << setprecision(2) << fixed << periodPrice.transportPrice << "$" << endl;
             file << "Room price," << setprecision(2) << fixed << periodPrice.roomPrice << "$" << endl;
-            file << "Water, coffee and soda price," << setprecision(2) << fixed << periodPrice.foodPrice << "$" << endl;
+            file << "Makeup price," << setprecision(2) << fixed << periodPrice.makeupPrice << "$" << endl;
+            file << "Food and water price," << setprecision(2) << fixed << periodPrice.foodPrice << "$" << endl;
             file << "Castle rental price," << setprecision(2) << fixed << periodPrice.rentPrice << "$" << endl;
             file << "Total price," << setprecision(2) << fixed << periodPrice.totalPrice << "$" << endl;
             file << endl;
@@ -445,7 +455,8 @@ void exportPrices(PeriodPrice periodPrice, string filename, const std::string &l
             file << "Perioada," << periodPrice.period << endl;
             file << "Cost transport," << setprecision(2) << fixed << periodPrice.transportPrice * 4.8 << "lei" << endl;
             file << "Cost camere," << setprecision(2) << fixed << periodPrice.roomPrice * 4.8 << "lei" << endl;
-            file << "Cost apa, cafea si suc," << setprecision(2) << fixed << periodPrice.foodPrice * 4.8 << "lei" << endl;
+            file << "Cost machiaj," << setprecision(2) << fixed << periodPrice.roomPrice * 4.8 << "lei" << endl;
+            file << "Cost mancare si apa," << setprecision(2) << fixed << periodPrice.foodPrice * 4.8 << "lei" << endl;
             file << "Cost inchiriere castel," << setprecision(2) << fixed << periodPrice.rentPrice * 4.8 << "lei" << endl;
             file << "Cost total," << setprecision(2) << fixed << periodPrice.totalPrice * 4.8 << "lei" << endl;
             file << endl;
@@ -459,52 +470,29 @@ void exportPrices(PeriodPrice periodPrice, string filename, const std::string &l
 }
 
 //? Export every menu from paramter to a csv file (Menu vegetarianMenu,Menu flexitarianMenu,Menu anythingMenu, filename)
-void exportMenu(Menu vegetarianMenu, Menu flexitarianMenu, Menu anythingMenu, string filename, const std::string &language) {
+void exportMenu(vector<Menu> menus, string filename, const std::string &language) {
     try {
         // Open the file
         ofstream file(filename);
 
-        // Throw an exception if the file is not open
-        if (!file.is_open()) {
-            throw "The file is not open";
-        }
-
-        // Write the menus to the file
-        // Write to CSV all details for the menu if language is "en" write in english, if language is "ro" write in romanian
+        // Write the headers to the file
         if (language == "en") {
-            file << "Vegetarian menu" << endl;
-            file << "Breakfast," << vegetarianMenu.soup << endl;
-            file << "Lunch," << vegetarianMenu.mainFood << endl;
-            file << "Dinner," << vegetarianMenu.dessert << endl;
-            file << endl;
-            file << "Flexitarian menu" << endl;
-            file << "Breakfast," << flexitarianMenu.soup << endl;
-            file << "Lunch," << flexitarianMenu.mainFood << endl;
-            file << "Dinner," << flexitarianMenu.dessert << endl;
-            file << endl;
-            file << "Anything menu" << endl;
-            file << "Breakfast," << anythingMenu.soup << endl;
-            file << "Lunch," << anythingMenu.mainFood << endl;
-            file << "Dinner," << anythingMenu.dessert << endl;
-            file << endl;
+            file << "Day,Soup,Main Food,Dessert" << endl;
         } else if (language == "ro") {
-            file << "Meniu vegetarian" << endl;
-            file << "Mic dejun," << vegetarianMenu.soup << endl;
-            file << "Pranz," << vegetarianMenu.mainFood << endl;
-            file << "Cina," << vegetarianMenu.dessert << endl;
-            file << endl;
-            file << "Meniu flexitarian" << endl;
-            file << "Mic dejun," << flexitarianMenu.soup << endl;
-            file << "Pranz," << flexitarianMenu.mainFood << endl;
-            file << "Cina," << flexitarianMenu.dessert << endl;
-            file << endl;
-            file << "Meniu orice" << endl;
-            file << "Mic dejun," << anythingMenu.soup << endl;
-            file << "Pranz," << anythingMenu.mainFood << endl;
-            file << "Cina," << anythingMenu.dessert << endl;
-            file << endl;
+            file << "Zi,Ciorba,Fel Principal,Desert" << endl;
+        } else {
+            throw "Language not supported";
         }
 
+        // Write the details for each menu to the file
+        for (int i = 0; i < menus.size(); i++) {
+            // Write the day number
+            int dayNumber = (i) / 3 + 1;
+            file << dayNumber << ",";
+
+            // Write the menu details
+            file << menus[i].soup << "," << menus[i].mainFood << "," << menus[i].dessert << endl;
+        }
         // Close the file
         file.close();
     } catch (const std::exception &e) {
@@ -635,7 +623,7 @@ PeriodPrice getPeriodPrice(int days, vector<Monster *> monsters, vector<PersonTy
     return PeriodPrice();
 }
 
-void getTotalPrice(vector<int> days, vector<Monster *> monsters, vector<PersonType> mainPersons, vector<PersonType> newPersons) {
+void getTotalPrice(vector<int> days, vector<Monster *> monsters, vector<PersonType> mainPersons, vector<PersonType> newPersons, string language) {
     try {
         // Throw an exception if the monsters vector is empty
         if (monsters.empty() || mainPersons.empty() || newPersons.empty() || days.empty()) {
@@ -648,7 +636,7 @@ void getTotalPrice(vector<int> days, vector<Monster *> monsters, vector<PersonTy
             PeriodPrice periodPrice = getPeriodPrice(days[i], monsters, mainPersons, newPersons);
 
             // Export all details for the period (Appending to exsting finalPrices.csv file if it exists)
-            exportPrices(periodPrice, "./data/generated/finalPrices.csv", "en");
+            exportPrices(periodPrice, "./data/generated/finalPrices.csv", language);
         }
     } catch (const std::exception &e) {
         std::cerr << e.what() << '\n';
@@ -718,30 +706,67 @@ void initializeMonstersMenu(vector<Monster *> monsters, const std::string &langu
             throw "Language not supported";
         }
 
-        // Throw an exception if the monsters array is empty
+        // Throw an exception if the monsters vector is empty
         if (monsters.empty()) {
-            throw "Monsters array is empty";
+            throw "The monsters vector is empty!";
+        }
+        // Generate a menu based on the food preference (choose betwen 'v', 'f' and 'a')
+        // Create an array with 3 vegetarian menus, 3 flexitarian menus and 3 anything menus
+        vector<Menu> menus;
+
+        // generate a random seed
+        srand(static_cast<unsigned int>(time(nullptr)));
+
+        // Generate 3 vegetarian menus
+        for (int i = 0; i < 3; i++) {
+            menus.push_back(generateMenu("v", language));
         }
 
-        // Generate a menu based on the food preference (choose betwen 'v', 'f' and 'a')
-        Menu vegetarianMenu = generateMenu("vegetarian", language);
-        Menu flexitarianMenu = generateMenu("flexitarian", language);
-        Menu anythingMenu = generateMenu("anything", language);
+        // Generate 3 flexitarian menus
+        for (int i = 0; i < 3; i++) {
+            menus.push_back(generateMenu("f", language));
+        }
+
+        // Generate 3 anything menus
+        for (int i = 0; i < 3; i++) {
+            menus.push_back(generateMenu("a", language));
+        }
 
         // Initialize every monster with a menu based on the food preference
         for (int i = 0; i < monsters.size(); i++) {
             if (monsters[i]->foodPreference == "vegetarian") {
-                monsters[i]->menu = vegetarianMenu;
+                monsters[i]->menu = menus[0];
             } else if (monsters[i]->foodPreference == "flexitarian") {
-                monsters[i]->menu = flexitarianMenu;
+                monsters[i]->menu = menus[3];
             } else {
-                monsters[i]->menu = anythingMenu;
+                monsters[i]->menu = menus[5];
             }
         }
 
         // Export every menu to a csv file
-        exportMenu(vegetarianMenu, flexitarianMenu, anythingMenu, "./data/generated/finalMenu.csv", language);
+        exportMenu(menus, "./data/generated/finalMenu.csv", language);
     } catch (const std::exception &e) {
         std::cerr << e.what() << '\n';
     }
+}
+
+// Convert the string to lowercase
+string toLower(string str) {
+    try {
+        // Throw an exception if the string is empty
+        if (str.empty()) {
+            throw "The string is empty";
+        }
+
+        // Convert the string to lowercase
+        for (int i = 0; i < str.length(); i++) {
+            str[i] = tolower(str[i]);
+        }
+
+        return str;
+    } catch (const std::exception &e) {
+        std::cerr << e.what() << '\n';
+    }
+
+    return "";
 }
